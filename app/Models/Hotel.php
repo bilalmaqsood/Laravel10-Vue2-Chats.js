@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+
+    protected $table = 'hotel';
+
+    public function bookings(){
+        return $this->hasMany(Booking::class);
+    }
 }
