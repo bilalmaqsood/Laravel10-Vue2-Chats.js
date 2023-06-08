@@ -11,7 +11,10 @@ class BookingRepository
 
         list($startDate, $endDate) = $this->getDateRange($duration);
 
-        $bookings = $hotel->bookings()->whereCreatedDateBetween($startDate->getTimestamp(), $endDate->getTimestamp())->get();
+        $bookings = $hotel->bookings()
+                    ->select("hotel_id", "date_created", "total_grand")
+                    ->whereCreatedDateBetween($startDate->getTimestamp(), $endDate->getTimestamp())
+                    ->get();
 
         list($data, $totalAmount) = $this->parseBookings($bookings, $startDate, $endDate, $duration);
 
