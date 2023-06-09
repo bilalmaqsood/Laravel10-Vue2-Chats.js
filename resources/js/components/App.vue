@@ -63,6 +63,8 @@ export default {
           return {
               datasets: [
                   {
+                      label: 'Booking Statistics',
+                      backgroundColor: '#f87979',
                       data: this.data
                   }
               ]
