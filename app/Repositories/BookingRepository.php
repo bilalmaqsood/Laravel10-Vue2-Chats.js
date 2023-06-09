@@ -27,6 +27,10 @@ class BookingRepository
         $startDate = now();
         $endDate = now();
 
+        $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y") - 2));
+        $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y") - 2));
+        return [$startDate, $endDate];
+
         if ($duration == 'current_week'){
             $startDate = Carbon::now()->startOfWeek();
             $endDate = Carbon::now()->endOfWeek();
@@ -40,8 +44,8 @@ class BookingRepository
             $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y")));
             $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y")));
         }else if($duration == 'last_year'){
-            $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y") - 1));
-            $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y") - 1));
+            $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y") - 2));
+            $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y") - 2));
         }
 
         return [$startDate, $endDate];
