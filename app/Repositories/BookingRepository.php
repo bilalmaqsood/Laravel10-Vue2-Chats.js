@@ -22,8 +22,6 @@ class BookingRepository
     }
 
     public function getDateRange($duration){
-
-
         $startDate = now();
         $endDate = now();
 
@@ -37,13 +35,14 @@ class BookingRepository
             $startDate = new Carbon('first day of last month');
             $endDate = new Carbon('last day of last month');
         }else if($duration == 'current_year'){
-            $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y")));
-            $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y")));
+            $startDate = Carbon::now()->startOfYear();
+            $endDate   = Carbon::now()->endOfYear();
         }else if($duration == 'last_year'){
-            $startDate = Carbon::parse(mktime(0, 0, 0, 1, 1, date("Y") - 2));
-            $endDate   = Carbon::parse(mktime(0, 0, 0, 12, 31, date("Y") - 2));
+            $year = Carbon::now()->subYear();
+            $startDate = $year->copy()->startOfYear();
+            $endDate   = $year->copy()->endOfYear();
         }
-
+        
         return [$startDate, $endDate];
     }
 
