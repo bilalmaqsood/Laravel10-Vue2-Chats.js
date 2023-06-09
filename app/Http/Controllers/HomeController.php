@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    protected $bookingService;
+    protected $booking;
 
     public function __construct(BookingRepository $booking)
     {
-        $this->bookingService = $booking;
+        $this->booking = $booking;
     }
 
     public function index(){
@@ -23,7 +23,7 @@ class HomeController extends Controller
 
         $duration = $request->get('duration');
 
-        $data = $this->bookingService->getFilteredBookings($hotel, $duration);
+        $data = $this->booking->getFilteredBookings($hotel, $duration);
 
         return $data;
     }
